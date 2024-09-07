@@ -179,7 +179,8 @@ The application features a modern, responsive UI designed with Tailwind CSS, ens
 
 This project is licensed under the MIT [LICENCE](LICENCE) - see the LICENSE file for details.
 
-📧 Contact
+## 📧 Contact
+
 If you have any questions or feedback, feel free to reach out:
 
 Darius Tohtin: [github](https://github.com/drac-pro)
