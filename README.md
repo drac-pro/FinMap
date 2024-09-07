@@ -183,5 +183,5 @@ This project is licensed under the MIT LICENCE - see the [LICENSE](LICENSE) file
 
 If you have any questions or feedback, feel free to reach out:
 
-Darius Tohtin: [github](https://github.com/drac-pro)
-Therese-Claire Agabi:
+- Darius Tohtin: [Github](https://github.com/drac-pro) [Email](dariustohtin@gmail.com)
+- Therese-Claire Agabi:
