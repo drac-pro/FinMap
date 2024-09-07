@@ -1,0 +1,58 @@
+{
+  "name": "finmap",
+  "version": "1.0.0",
+  "description": "FinMap - Personal Finance Dashboard - Portfolio Project",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "lint": "./node_modules/.bin/eslint",
+    "check-lint": "lint [0-9]*.js",
+    "start-server": "nodemon --exec babel-node --presets @babel/preset-env ./app.js",
+    "test": "./node_modules/.bin/mocha --require @babel/register --exit"
+  },
+  "author": "Darius Tohtin",
+  "contributors": [
+    {
+      "name": "Darius Tohtin",
+      "email": "dariustohtin@gmail.com",
+      "url": "https://github.com/drac-pro"
+    },
+    {
+      "name": "Therese-Claire",
+      "email": "awonguagabi@gmail.com",
+      "url": "https://github.com/Therese-Claire"
+    },
+    {
+      "name": "Edzordzinam Yao Alipui",
+      "email": "edzordzinam.alipui@gmail.com",
+      "url": "https://github.com/edzordzinam44"
+    }
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "bull": "^3.16.0",
+    "chai-http": "^4.3.0",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^7.5.2",
+    "redis": "^2.8.0",
+    "uuid": "^8.2.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.0",
+    "@babel/core": "^7.8.0",
+    "@babel/node": "^7.8.0",
+    "@babel/preset-env": "^7.8.2",
+    "@babel/register": "^7.8.0",
+    "chai": "^4.2.0",
+    "eslint": "^6.4.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2",
+    "mocha": "^6.2.2",
+    "nodemon": "^3.0.1",
+    "sinon": "^7.5.0"
+  }
+}
