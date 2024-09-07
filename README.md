@@ -177,7 +177,7 @@ The application features a modern, responsive UI designed with Tailwind CSS, ens
 
 ## 📄 License
 
-This project is licensed under the MIT [License](LICENCE) - see the LICENSE file for details.
+This project is licensed under the MIT [LICENCE](LICENCE) - see the LICENSE file for details.
 
 📧 Contact
 If you have any questions or feedback, feel free to reach out:
