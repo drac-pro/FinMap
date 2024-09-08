@@ -185,3 +185,4 @@ If you have any questions or feedback, feel free to reach out:
 
 - Darius Tohtin: [Github](https://github.com/drac-pro) [Email](dariustohtin@gmail.com)
 - Therese-Claire Agabi:
+- Edzordzinam Alipui:[Github](https://github.com/edzordzinam44) [Email](edzordzinam.alipui@gmail.com)
