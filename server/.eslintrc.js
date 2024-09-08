@@ -2,11 +2,12 @@ module.exports = {
     env: {
       browser: false,
       es6: true,
+      node: true,
       jest: true,
     },
     extends: [
       'airbnb-base',
-      'plugin:jest/all',
+      'plugin:jest/recommended',
     ],
     globals: {
       Atomics: 'readonly',
@@ -18,6 +19,7 @@ module.exports = {
     },
     plugins: ['jest'],
     rules: {
+      'jest/require-hook': 'off',
       'max-classes-per-file': 'off',
       'no-underscore-dangle': 'off',
       'no-console': 'off',
