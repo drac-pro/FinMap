@@ -1,15 +1,16 @@
+import { verify } from 'jsonwebtoken';
+
 require('dotenv').config();
-const jwt = require('jsonwebtoken');
 
 class AuthMiddleware {
   // Middleware to verify JWT token
   static authenticateToken(req, res, next) {
-    const token = req.hearder('Authorization')?.split(' ')[1];
+    const token = req.headers.authorization?.split(' ')[1];
 
     if (!token) return res.status(401).json({ error: 'Access denied. No token provided.' });
 
     try {
-      const decoded = jwt.verify(token, process.env.JWT_SECRET);
+      const decoded = verify(token, process.env.JWT_SECRET);
       req.user = decoded;
       next();
     } catch (error) {
@@ -19,4 +20,4 @@ class AuthMiddleware {
   }
 }
 
-module.exports = AuthMiddleware;
+export default AuthMiddleware;
