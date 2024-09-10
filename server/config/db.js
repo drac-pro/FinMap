@@ -1,4 +1,5 @@
-const mongoose = require('mongoose');
+import { connect, connection } from 'mongoose';
+
 require('dotenv').config();
 
 class DBClient {
@@ -14,12 +15,12 @@ class DBClient {
   // method to connect to the mongodb database
   async connectDB(url) {
     try {
-      await mongoose.connect(url, {
+      await connect(url, {
         useNewUrlParser: true,
         useUnifiedTopology: true,
       });
       console.log('MongoDB connected');
-      this.db = mongoose.connection;
+      this.db = connection;
     } catch (error) {
       console.error(`Database Connection Error: ${error.message}`);
       process.exit(1);
@@ -32,4 +33,4 @@ class DBClient {
   }
 }
 
-module.exports = new DBClient();
+export default new DBClient();
