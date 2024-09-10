@@ -96,7 +96,7 @@ Before you begin, ensure you have the following installed:
 4. **Start the server**:
 
     ```bash
-    npm start
+    npm run start-server
     ```
 
 5. **Run the frontend**:
