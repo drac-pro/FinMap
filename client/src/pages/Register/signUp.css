@@ -1,0 +1,118 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.signup-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+form h2 {
+    font-size: 2rem;
+    text-align: center;
+    
+}
+
+form{
+    backdrop-filter: blur(5px);
+    border-radius: 10px;
+    color: rgb(184, 23, 23);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+    width: 20rem;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+form .form-group {
+    width: 100%;
+    height: 50%;
+    /* background: #794646; */
+    display: flex;
+    flex-direction: column;
+    margin: 30px 0;
+    padding-left: 20px;
+}
+
+.form-group input {
+    width: calc(100% - 20px);
+    height: 60px;
+    padding: 10px;
+    /* border: none; */
+    border-radius: 5px;
+    height: 2.5rem;
+    border-radius: 20px;
+    /* opacity: -20%; */
+    visibility: 20%;
+    /* background: color-mix(in srgb, var(--blue), transparent 55%); */
+}
+
+.form-group input:hover {
+    /* outline: none; */
+    border: 2px solid #0512c9;
+    cursor: pointer;
+}
+
+
+label {
+    font-size: 1.2rem;
+    font-size: large;
+}
+
+button {
+    width: 50%;
+    height: 60px;
+    border: none;
+    border-radius: 10px;
+    background: #794646;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: 0.3s;
+    padding: 10px;
+    margin-left: 80px;
+}
+
+button:hover {
+    background: #2108b1;
+    transform: translateY(-9px);
+    
+}
+
+.about-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+}
+
+.about-btn button {
+    position: absolute;
+    top: 0;
+    right: 4px;
+    width: 50%;
+}
+
+.login-link {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 1.2rem;
+    color: rgb(3, 9, 14);
+}
+
+.login-link a {
+    color: #030303;
+    text-decoration: none;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.login-link a:hover {
+    color: #f10909;
+}
+
+/* #signUp-logo {
+    background-image: url('');
+} */
