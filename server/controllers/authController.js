@@ -4,7 +4,7 @@ import User from '../models/userModel';
 require('dotenv').config();
 
 const generateToken = (id) => sign({ id }, process.env.JWT_SECRET, {
-  expiresIn: '30d',
+  expiresIn: '15m',
 });
 
 class AuthController {
