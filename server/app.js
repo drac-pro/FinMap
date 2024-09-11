@@ -2,12 +2,14 @@ import express, { json } from 'express';
 // eslint-disable-next-line no-unused-vars
 import dbClient from './config/db';
 import router from './routes/authRoutes';
+import financeRouter from './routes/financeRoutes';
 
 require('dotenv').config();
 
 const app = express();
 app.use(json());
 app.use('/api/auth', router);
+app.use('/api/finance', financeRouter);
 
 const PORT = process.env.PORT || 5000;
 
