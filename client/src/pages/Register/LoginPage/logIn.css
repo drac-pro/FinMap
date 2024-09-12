@@ -4,12 +4,12 @@
     box-sizing: border-box;
 }
 
-.signup-container {
+.login-container {
     display: flex;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    margin-left: 90px;
+    margin-left: 35%;
 }
 
 form h2 {
@@ -67,7 +67,7 @@ button {
     height: 60px;
     border: none;
     border-radius: 10px;
-    background: #794646;
+    background: #228B22;
     color: white;
     font-size: 1.2rem;
     cursor: pointer;
@@ -82,7 +82,7 @@ button:hover {
     
 }
 
-.about-btn {
+/* .about-btn {
     position: absolute;
     top: 0;
     right: 0;
@@ -94,7 +94,7 @@ button:hover {
     top: 0;
     right: 4px;
     width: 50%;
-}
+} */
 
 .login-link {
     text-align: center;
@@ -113,7 +113,3 @@ button:hover {
 .login-link a:hover {
     color: #f10909;
 }
-
-/* #signUp-logo {
-    background-image: url('');
-} */
