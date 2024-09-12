@@ -1,4 +1,5 @@
 import React from "react";
+import "./homepage.css";
 
 function HomePage() {
     let pageTitle = "Welcome to FinMap",

@@ -4,6 +4,8 @@ import './App.css';
 import SignUp from '../pages/Register/SignupPage/signUp';
 import LogIn from '../pages/Register/LoginPage/logIn';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
+
 function App() {
   return (
     <Router>

@@ -18,6 +18,8 @@ form h2 {
     
 }
 
+/* Form styling */
+
 form{
     backdrop-filter: blur(5px);
     border-radius: 10px;
