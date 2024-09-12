@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import FinanceController from '../controllers/FinanceController.js';
-import AuthMiddleware from '../middleware/authMiddleware.js';
+import FinanceController from '../controllers/FinanceController';
+import AuthMiddleware from '../middleware/authMiddleware';
 
 const financeRouter = Router();
 
@@ -10,6 +10,5 @@ financeRouter.get('/income', AuthMiddleware.authenticateToken, FinanceController
 
 financeRouter.post('/expense', AuthMiddleware.authenticateToken, FinanceController.logExpense);
 financeRouter.get('/expense', AuthMiddleware.authenticateToken, FinanceController.getExpense);
-
 
 export default financeRouter;
