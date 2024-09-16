@@ -9,6 +9,7 @@
     align-items: center;
     justify-content: center;
     min-height: 100vh;
+    margin-left: 35%;
 }
 
 form h2 {
@@ -16,6 +17,8 @@ form h2 {
     text-align: center;
     
 }
+
+/* Form styling */
 
 form{
     backdrop-filter: blur(5px);
@@ -66,7 +69,7 @@ button {
     height: 60px;
     border: none;
     border-radius: 10px;
-    background: #794646;
+    background: #228B22;
     color: white;
     font-size: 1.2rem;
     cursor: pointer;
