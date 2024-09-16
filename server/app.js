@@ -4,6 +4,8 @@ import dbClient from './config/db';
 import router from './routes/authRoutes';
 import financeRouter from './routes/financeRoutes';
 import dashboardRouter from './routes/dashboardRouter';
+import budgetRouter from './routes/budgetRoutes';
+import loanRouter from './routes/loanRoutes';
 
 require('dotenv').config();
 
@@ -12,6 +14,8 @@ app.use(json());
 app.use('/api/auth', router);
 app.use('/api/finance', financeRouter);
 app.use('/api/dashboard', dashboardRouter);
+app.use('/api/budget', budgetRouter);
+app.use('/api/loan', loanRouter);
 
 const PORT = process.env.PORT || 5000;
 
