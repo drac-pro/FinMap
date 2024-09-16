@@ -39,7 +39,7 @@ function SignUp() {
                             type="text"
                             placeholder='First Name'
                             name="name"
-                            value={formData.name}
+                            value={formData.FirstName}
                             onChange={handleChange}
                             required
                         />
@@ -50,7 +50,7 @@ function SignUp() {
                             type="text"
                             placeholder='Last Name'
                             name="name"
-                            value={formData.name}
+                            value={formData.LastName}
                             onChange={handleChange}
                             required
                         />
