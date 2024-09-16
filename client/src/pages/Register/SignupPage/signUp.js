@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 // import { Link } from 'react-router-dom';
 import './signUp.css';
+// import './logIn';
+// import { Link } from 'react-router-dom';
 
 function SignUp() {
     const [formData, setFormData] = useState({
@@ -21,10 +23,9 @@ function SignUp() {
         e.preventDefault();
         console.log(formData);
     };
-
     const navigateToAboutUs = () => {
         window.location.href = '/about';
-    }
+    };
 
     return (
         <>
@@ -88,7 +89,7 @@ function SignUp() {
                         />
                     </div>
                     <button type="submit">Sign Up</button>
-                    <p className='login-link'>Already have an account? <a href='/login'>Log In</a></p>
+                    <p className='login-link'>Already have an account? <a href='./logIn' _blank>Log In</a></p>
                 </form>
             </div>
             <nav className='about-btn'>
