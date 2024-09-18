@@ -1,5 +1,6 @@
 import Income from '../models/incomeModel';
 import Expense from '../models/expenseModel';
+import Budget from '../models/budgetModel';
 
 // Controller for Income and Expense related logic
 class FinanceController {
@@ -42,6 +43,26 @@ class FinanceController {
         amount,
         category,
       });
+
+      // Find the matching budget for this category and update it if it exists
+      const budget = await Budget.findOne({ userId: req.user._id, category });
+      if (budget) {
+        budget.spentAmount += amount;
+
+        const spentPercentage = (budget.spentAmount / budget.allocatedAmount) * 100;
+
+        if (budget.spentAmount > budget.allocatedAmount) {
+          budget.status = 'exceeded';
+        } else if (spentPercentage >= 100) {
+          budget.status = 'completed';
+        } else if (spentPercentage >= 75) {
+          budget.status = 'warning';
+        } else {
+          budget.status = 'active';
+        }
+        await budget.save();
+      }
+
       return res.status(201).json({ message: 'Expense logged successfully', expense });
     } catch (error) {
       console.error(error.message);
