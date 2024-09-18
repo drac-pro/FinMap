@@ -25,13 +25,39 @@ class BudgetController {
 
   // Get User's Budget by Category
   static async getBudget(req, res) {
-    const { category } = req.params;
+    const {
+      category, fromDate, toDate, status, all = false, limit = 10, page = 1,
+    } = req.query;
 
     try {
-      const budget = await Budget.findOne({ userId: req.user._id, category });
-      if (!budget) return res.status(404).json({ error: 'No buget for this category' });
+      const query = { userId: req.user._id };
 
-      return res.json({ budget });
+      if (category) {
+        query.category = { $regex: category, $options: 'i' };
+      }
+
+      if (status) {
+        query.status = status;
+      }
+
+      if (fromDate || toDate) {
+        query.startDate = {};
+        if (fromDate) query.startDate.$gte = new Date(fromDate);
+        if (toDate) query.startDate.$lte = new Date(toDate);
+      }
+
+      let budgets;
+      if (all) {
+        budgets = await Budget.find(query).sort({ startDate: -1 });
+      } else {
+        const skip = (parseInt(page, 10) - 1) * parseInt(limit, 10);
+        budgets = await Budget.find(query)
+          .sort({ startDate: -1 })
+          .skip(skip)
+          .limit(parseInt(limit, 10));
+      }
+
+      return res.json({ budgets });
     } catch (error) {
       console.error('Error getting Budget', error.message);
       return res.status(500).json({ error: 'Server error' });
