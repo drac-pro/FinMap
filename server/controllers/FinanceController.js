@@ -24,8 +24,40 @@ class FinanceController {
 
   // Get all Incomes for the user
   static async getIncome(req, res) {
+    const {
+      page = 1, limit = 10, fromDate, toDate, all = false, minAmount, maxAmount, source,
+    } = req.query;
+
     try {
-      const incomes = await Income.find({ userId: req.user._id });
+      const query = { userId: req.user._id };
+
+      if (fromDate || toDate) {
+        query.date = {};
+        if (fromDate) query.date.$gte = new Date(fromDate);
+        if (toDate) query.date.$lte = new Date(toDate);
+      }
+
+      if (minAmount || maxAmount) {
+        query.amount = {};
+        if (minAmount) query.amount.$gte = parseFloat(minAmount);
+        if (maxAmount) query.amount.$lte = parseFloat(maxAmount);
+      }
+
+      if (source) {
+        query.source = { $regex: source, $options: 'i' };
+      }
+
+      let incomes;
+      if (all) {
+        incomes = await Income.find(query).sort({ date: -1 });
+      } else {
+        const skip = (parseInt(page, 10) - 1) * parseInt(limit, 10);
+        incomes = await Income.find(query)
+          .sort({ date: -1 })
+          .skip(skip)
+          .limit(parseInt(limit, 10));
+      }
+
       return res.status(200).json({ incomes });
     } catch (error) {
       console.error(error.message);
@@ -72,8 +104,40 @@ class FinanceController {
 
   // Get all Expenses for the user
   static async getExpense(req, res) {
+    const {
+      page = 1, limit = 10, fromDate, toDate, all = false, minAmount, maxAmount, category,
+    } = req.query;
+
     try {
-      const expenses = await Expense.find({ userId: req.user._id });
+      const query = { userId: req.user._id };
+
+      if (fromDate || toDate) {
+        query.date = {};
+        if (fromDate) query.date.$gte = new Date(fromDate);
+        if (toDate) query.date.$lte = new Date(toDate);
+      }
+
+      if (minAmount || maxAmount) {
+        query.amount = {};
+        if (minAmount) query.amount.$gte = parseFloat(minAmount);
+        if (maxAmount) query.amount.$lte = parseFloat(maxAmount);
+      }
+
+      if (category) {
+        query.category = { $regex: category, $options: 'i' };
+      }
+
+      let expenses;
+      if (all) {
+        expenses = await Expense.find(query).sort({ date: -1 });
+      } else {
+        const skip = (parseInt(page, 10) - 1) * parseInt(limit, 10);
+        expenses = await Expense.find(query)
+          .sort({ date: -1 })
+          .skip(skip)
+          .limit(parseInt(limit, 10));
+      }
+
       return res.status(200).json({ expenses });
     } catch (error) {
       console.error(error.message);
