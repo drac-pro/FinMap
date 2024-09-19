@@ -44,15 +44,44 @@ class LoanController {
         return res.json({ loans });
       }
 
-      // remember to use agregation to add count
-      // and implement next and previous for all pagination so far
+      // Pagination logic using aggregation
       const skip = (parseInt(page, 10) - 1) * parseInt(limit, 10);
-      const loans = await Loan.find(query)
-        .sort({ loanDate: -1 })
-        .skip(skip)
-        .limit(parseInt(limit, 10));
 
-      return res.json({ loans });
+      const result = await Loan.aggregate([
+        { $match: query },
+        {
+          $facet: {
+            loans: [
+              { $sort: { loanDate: -1 } },
+              { $skip: skip },
+              { $limit: parseInt(limit, 10) },
+            ],
+            totalCount: [
+              { $count: 'count' },
+            ],
+          },
+        },
+      ]);
+
+      const { loans } = result[0];
+      const totalLoans = result[0].totalCount.length > 0 ? result[0].totalCount[0].count : 0;
+      const totalPages = Math.ceil(totalLoans / limit);
+
+      // Generate nextPage and previousPage URLs
+      const nextPage = (page < totalPages)
+        ? `${req.baseUrl}?page=${parseInt(page, 10) + 1}&limit=${limit}${loanType ? `&loanType=${loanType}` : ''}${status ? `&status=${status}` : ''}${fromDate ? `&fromDate=${fromDate}` : ''}${toDate ? `&toDate=${toDate}` : ''}`
+        : null;
+      const previousPage = (page > 1)
+        ? `${req.baseUrl}?page=${parseInt(page, 10) - 1}&limit=${limit}${loanType ? `&loanType=${loanType}` : ''}${status ? `&status=${status}` : ''}${fromDate ? `&fromDate=${fromDate}` : ''}${toDate ? `&toDate=${toDate}` : ''}`
+        : null;
+
+      return res.json({
+        loans,
+        currentPage: parseInt(page, 10),
+        totalPages,
+        nextPage,
+        previousPage,
+      });
     } catch (error) {
       console.error('Error getting Loans: ', error.message);
       return res.status(500).json({ error: 'Server error' });

@@ -48,18 +48,49 @@ class FinanceController {
         query.source = { $regex: source, $options: 'i' };
       }
 
-      let incomes;
       if (all) {
-        incomes = await Income.find(query).sort({ date: -1 });
-      } else {
-        const skip = (parseInt(page, 10) - 1) * parseInt(limit, 10);
-        incomes = await Income.find(query)
-          .sort({ date: -1 })
-          .skip(skip)
-          .limit(parseInt(limit, 10));
+        const incomes = await Income.find(query).sort({ date: -1 });
+        return res.json({ incomes });
       }
 
-      return res.status(200).json({ incomes });
+      // Pagination logic using aggregation
+      const skip = (parseInt(page, 10) - 1) * parseInt(limit, 10);
+
+      const result = await Income.aggregate([
+        { $match: query },
+        {
+          $facet: {
+            incomes: [
+              { $sort: { date: -1 } },
+              { $skip: skip },
+              { $limit: parseInt(limit, 10) },
+            ],
+            totalCount: [
+              { $count: 'count' },
+            ],
+          },
+        },
+      ]);
+
+      const { incomes } = result[0];
+      const totalIncomes = result[0].totalCount.length > 0 ? result[0].totalCount[0].count : 0;
+      const totalPages = Math.ceil(totalIncomes / limit);
+
+      // Generate nextPage and previousPage URLs
+      const nextPage = (page < totalPages)
+        ? `${req.baseUrl}?page=${parseInt(page, 10) + 1}&limit=${limit}${source ? `&source=${source}` : ''}${fromDate ? `&fromDate=${fromDate}` : ''}${toDate ? `&toDate=${toDate}` : ''}${minAmount ? `&minAmount=${minAmount}` : ''}${maxAmount ? `&maxAmount=${maxAmount}` : ''}`
+        : null;
+      const previousPage = (page > 1)
+        ? `${req.baseUrl}?page=${parseInt(page, 10) - 1}&limit=${limit}${source ? `&source=${source}` : ''}${fromDate ? `&fromDate=${fromDate}` : ''}${toDate ? `&toDate=${toDate}` : ''}${minAmount ? `&minAmount=${minAmount}` : ''}${maxAmount ? `&maxAmount=${maxAmount}` : ''}`
+        : null;
+
+      return res.status(200).json({
+        incomes,
+        currentPage: parseInt(page, 10),
+        totalPages,
+        nextPage,
+        previousPage,
+      });
     } catch (error) {
       console.error(error.message);
       return res.status(500).json({ error: 'Server error' });
@@ -128,18 +159,49 @@ class FinanceController {
         query.category = { $regex: category, $options: 'i' };
       }
 
-      let expenses;
       if (all) {
-        expenses = await Expense.find(query).sort({ date: -1 });
-      } else {
-        const skip = (parseInt(page, 10) - 1) * parseInt(limit, 10);
-        expenses = await Expense.find(query)
-          .sort({ date: -1 })
-          .skip(skip)
-          .limit(parseInt(limit, 10));
+        const expenses = await Expense.find(query).sort({ date: -1 });
+        return res.json({ expenses });
       }
 
-      return res.status(200).json({ expenses });
+      // Pagination logic using aggregation
+      const skip = (parseInt(page, 10) - 1) * parseInt(limit, 10);
+
+      const result = await Expense.aggregate([
+        { $match: query },
+        {
+          $facet: {
+            expenses: [
+              { $sort: { date: -1 } },
+              { $skip: skip },
+              { $limit: parseInt(limit, 10) },
+            ],
+            totalCount: [
+              { $count: 'count' },
+            ],
+          },
+        },
+      ]);
+
+      const { expenses } = result[0];
+      const totalExpenses = result[0].totalCount.length > 0 ? result[0].totalCount[0].count : 0;
+      const totalPages = Math.ceil(totalExpenses / limit);
+
+      // Generate nextPage and previousPage URLs
+      const nextPage = (page < totalPages)
+        ? `${req.baseUrl}?page=${parseInt(page, 10) + 1}&limit=${limit}${category ? `&category=${category}` : ''}${fromDate ? `&fromDate=${fromDate}` : ''}${toDate ? `&toDate=${toDate}` : ''}${minAmount ? `&minAmount=${minAmount}` : ''}${maxAmount ? `&maxAmount=${maxAmount}` : ''}`
+        : null;
+      const previousPage = (page > 1)
+        ? `${req.baseUrl}?page=${parseInt(page, 10) - 1}&limit=${limit}${category ? `&category=${category}` : ''}${fromDate ? `&fromDate=${fromDate}` : ''}${toDate ? `&toDate=${toDate}` : ''}${minAmount ? `&minAmount=${minAmount}` : ''}${maxAmount ? `&maxAmount=${maxAmount}` : ''}`
+        : null;
+
+      return res.status(200).json({
+        expenses,
+        currentPage: parseInt(page, 10),
+        totalPages,
+        nextPage,
+        previousPage,
+      });
     } catch (error) {
       console.error(error.message);
       return res.status(500).json({ error: 'Server error' });
