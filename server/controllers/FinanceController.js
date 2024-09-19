@@ -1,6 +1,7 @@
 import Income from '../models/incomeModel';
 import Expense from '../models/expenseModel';
 import Budget from '../models/budgetModel';
+import recommendSpendingImprovements from '../utils/recommendationEngine';
 
 // Controller for Income and Expense related logic
 class FinanceController {
@@ -139,6 +140,19 @@ class FinanceController {
       }
 
       return res.status(200).json({ expenses });
+    } catch (error) {
+      console.error(error.message);
+      return res.status(500).json({ error: 'Server error' });
+    }
+  }
+
+  // Get recommendations regarding expenses and income
+  static async getRecommendations(req, res) {
+    try {
+      const expenses = await Expense.find({ userId: req.user._id });
+      const recommendation = await recommendSpendingImprovements(expenses);
+
+      return res.status(200).json({ message: 'AI Recommendation', recommendation });
     } catch (error) {
       console.error(error.message);
       return res.status(500).json({ error: 'Server error' });

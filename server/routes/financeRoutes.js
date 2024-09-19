@@ -10,5 +10,6 @@ financeRouter.get('/income', AuthMiddleware.authenticateToken, FinanceController
 
 financeRouter.post('/expense', AuthMiddleware.authenticateToken, FinanceController.logExpense);
 financeRouter.get('/expense', AuthMiddleware.authenticateToken, FinanceController.getExpense);
+financeRouter.get('/recommendation', AuthMiddleware.authenticateToken, FinanceController.getRecommendations);
 
 export default financeRouter;
