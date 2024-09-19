@@ -28,8 +28,30 @@ class LoanController {
 
   // Get all loans for a user (both given and taken)
   static async getLoans(req, res) {
+    const {
+      loanType, fromDate, toDate, status, page = 1, limit = 10, all = false,
+    } = req.query;
+
     try {
-      const loans = await Loan.find({ userId: req.user._id });
+      const query = { userId: req.user._id };
+
+      if (loanType) query.loanType = loanType;
+      if (status) query.status = status;
+      if (fromDate && toDate) query.loanDate = { $gte: new Date(fromDate), $lte: new Date(toDate) };
+
+      if (all) {
+        const loans = await Loan.find(query).sort({ loanDate: -1 });
+        return res.json({ loans });
+      }
+
+      // remember to use agregation to add count
+      // and implement next and previous for all pagination so far
+      const skip = (parseInt(page, 10) - 1) * parseInt(limit, 10);
+      const loans = await Loan.find(query)
+        .sort({ loanDate: -1 })
+        .skip(skip)
+        .limit(parseInt(limit, 10));
+
       return res.json({ loans });
     } catch (error) {
       console.error('Error getting Loans: ', error.message);
