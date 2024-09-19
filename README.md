@@ -4,6 +4,8 @@
 
 FinMap is a full-stack web application to manage your finances effortlessly. Track your expenses, set budgets, monitor your investments, and get personalized AI-powered insights based on your spending habits. Built with Node.js, Express, MongoDB, React, and integrated with real-time financial APIs, FinMap delivers a modern solution to personal financial management.
 
+**_NOTE_**: we are focusing on backend for this portfolio project
+
 ## 🚀 Project Overview
 
 Managing personal finances can be challenging. FinMap offers an intuitive platform to help users:
