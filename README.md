@@ -108,6 +108,166 @@ Before you begin, ensure you have the following installed:
 
 ---
 
+## 📖 API Endpoints Documentation
+
+**_NOTE_**: you can use postman to test these endpoints
+
+### Authentication
+
+**Register User**:
+
+- Endpoint: /api/auth/register
+- Method: POST
+- Description: Registers a new user.
+
+```bash
+curl -X POST http://localhost:5000/api/auth/register \
+-H "Content-Type: application/json" \
+-d '{"username": "testuser", "email": "testuser@example.com", "password": "password"}'
+```
+
+**Login User**:
+
+- Endpoint: /api/auth/login
+- Method: POST
+- Description: Logs in a user and returns a token.
+
+```bash
+curl -X POST http://localhost:5000/api/auth/login \
+-H "Content-Type: application/json" \
+-d '{"email": "testuser@example.com", "password": "password"}'
+```
+
+### Finance: Income, Expense, Loan, and Budget Logging
+
+**Log Income**:
+
+- Endpoint: /api/finance/income
+- Method: POST
+- Description: Logs a new income record.
+
+```bash
+curl -X POST http://localhost:5000/api/finance/income \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer <your_token>" \
+-d '{"category": "Salary", "amount": 5000}'
+```
+
+**Log Expense**:
+
+- Endpoint: /api/finance/expense
+- Method: POST
+- Description: Logs a new expense
+
+```bash
+curl -X POST http://localhost:5000/api/finance/expense \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer <your_token>" \
+-d '{"category": "Groceries", "amount": 150}'
+```
+
+**Log Loan**:
+
+- Endpoint: /api/loan/log
+- Method: POST
+- Description: Logs a loan record (given or taken).
+
+```bash
+curl -X POST http://localhost:5000/api/loan/log \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer <your_token>" \
+-d '{"loanType": "creditor", "amount": 1000, "counterparty": "Bank", "loanDate": "2024-09-01", "dueDate": "2024-12-01", "interestRate": 5.0}'
+```
+
+**Log Budget**:
+
+- Endpoint: /api/budget/set
+- Method: POST
+- Description: Logs a new budget.
+
+```bash
+curl -X POST http://localhost:5000/api/budget/set \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer <your_token>" \
+-d '{"name": "Monthly Budget", "category": "Essentials", "allocatedAmount": 2000, "endDate": "2024-10-31"}'
+```
+
+### Finance: Retrieving Income, Expense, Loan, and Budget
+
+**Get Income**:
+
+- Endpoint: /api/finance/income
+- Method: GET
+- Description: Retrieves all income records (supports pagination and filters).
+
+```bash
+curl -X GET "http://localhost:5000/api/finance/income?all=true" \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer <your_token>"
+```
+
+**Get Expenses**:
+
+- Endpoint: /api/finance/expense
+- Method: GET
+- Description: Retrieves all expense records (supports pagination and filters).
+
+```bash
+curl -X GET "http://localhost:5000/api/finance/expense?page=1&limit=10" \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer <your_token>"
+```
+
+**Get Loans**:
+
+- Endpoint: /api/loan/all
+- Method: GET
+- Description: Retrieves all loan records (supports pagination and filters).
+
+```bash
+curl -X GET "http://localhost:5000/api/loan/all?all=true" \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer <your_token>"
+```
+
+**Get Budgets**:
+
+- Endpoint: /api/budget/get
+- Method: GET
+- Description: Retrieves all budgets (supports pagination).
+
+```bash
+curl -X GET "http://localhost:5000/api/budget/get?all=true" \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer <your_token>"
+```
+
+### Finance: Overview Endpoint
+
+**Get Overview**:
+
+- Endpoint: /api/finance/overview
+- Method: GET
+- Description: Retrieves a summary of income, expenses, loans, and budgets.
+
+```bash
+curl -X GET http://localhost:5000/api/dashboard/overview \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer <your_token>"
+```
+
+### AI-recomendation Endpoint
+
+- Endpoint: /api/finance/overview
+- Method: GET
+- Description: retrieves ai recommendation based on income
+
+```bash
+curl -X GET http://localhost:5000/api/finance/recommendation \
+-H "Content-Type: application/json" \
+-H "Authorization: Bearer <your_token>"
+```
+
 ## 🧠 AI-Powered Insights
 
 FinMap uses **TensorFlow.js** to analyze user spending patterns and provide personalized recommendations. By continuously learning from user data, the AI-powered insights offer tailored advice, helping users optimize their financial health.
