@@ -46,18 +46,49 @@ class BudgetController {
         if (toDate) query.startDate.$lte = new Date(toDate);
       }
 
-      let budgets;
       if (all) {
-        budgets = await Budget.find(query).sort({ startDate: -1 });
-      } else {
-        const skip = (parseInt(page, 10) - 1) * parseInt(limit, 10);
-        budgets = await Budget.find(query)
-          .sort({ startDate: -1 })
-          .skip(skip)
-          .limit(parseInt(limit, 10));
+        const budgets = await Budget.find(query).sort({ startDate: -1 });
+        return res.json({ budgets });
       }
 
-      return res.json({ budgets });
+      // pagination with aggregation.
+      const skip = (parseInt(page, 10) - 1) * parseInt(limit, 10);
+
+      const result = await Budget.aggregate([
+        { $match: query },
+        {
+          $facet: {
+            budgets: [
+              { $sort: { startDate: -1 } },
+              { $skip: skip },
+              { $limit: parseInt(limit, 10) },
+            ],
+            totalCount: [
+              { $count: 'count' },
+            ],
+          },
+        },
+      ]);
+
+      const { budgets } = result[0];
+      const totalBudgets = result[0].totalCount.length > 0 ? result[0].totalCount[0].count : 0;
+      const totalPages = Math.ceil(totalBudgets / limit);
+
+      // Generate nextPage and previousPage URLs
+      const nextPage = (page < totalPages)
+        ? `${req.baseUrl}?page=${parseInt(page, 10) + 1}&limit=${limit}${category ? `&category=${category}` : ''}${status ? `&status=${status}` : ''}${fromDate ? `&fromDate=${fromDate}` : ''}${toDate ? `&toDate=${toDate}` : ''}`
+        : null;
+      const previousPage = (page > 1)
+        ? `${req.baseUrl}?page=${parseInt(page, 10) - 1}&limit=${limit}${category ? `&category=${category}` : ''}${status ? `&status=${status}` : ''}${fromDate ? `&fromDate=${fromDate}` : ''}${toDate ? `&toDate=${toDate}` : ''}`
+        : null;
+
+      return res.json({
+        budgets,
+        currentPage: parseInt(page, 10),
+        totalPages,
+        nextPage,
+        previousPage,
+      });
     } catch (error) {
       console.error('Error getting Budget', error.message);
       return res.status(500).json({ error: 'Server error' });
