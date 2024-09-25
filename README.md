@@ -32,6 +32,8 @@ FinMap is built to showcase the combined power of modern web technologies, machi
 
 ### **Frontend**
 
+_still to be implimented fully_.
+
 - **React**: Dynamic and responsive user interface development.
 - **Chart.js**: Beautiful data visualization for dashboards and reports.
 - **Tailwind CSS**: Modern utility-first CSS framework for styling.
@@ -271,11 +273,15 @@ FinMap uses **TensorFlow.js** to analyze user spending patterns and provide pers
 
 ## 💼 Investment Portfolio
 
+_still to be implimented_.
+
 Track and manage your investments with real-time stock data using the **Alpha Vantage API**. Easily view portfolio performance and make informed decisions based on up-to-date financial information.
 
 ---
 
 ## 🌍 Multi-Currency Support
+
+_still to be implimented_.
 
 Easily convert your financial data into different currencies with the **ExchangeRate API**. Whether you’re tracking foreign investments or just converting expenses, multi-currency support keeps everything updated with live exchange rates.
 
@@ -290,6 +296,8 @@ Easily convert your financial data into different currencies with the **Exchange
 
 ## 🤖 Future Enhancements
 
+_still to be implimented_.
+
 - **Bank Account Integration**: Using the **Plaid API** to allow users to link bank accounts directly.
 - **Premium User Accounts**: Offer premium features such as advanced AI insights and detailed reports.
 - **Dark Mode**: Enhance user experience with a dark mode toggle.
@@ -298,11 +306,15 @@ Easily convert your financial data into different currencies with the **Exchange
 
 ## 📈 Data Visualization
 
+_still to be implimented_.
+
 Our dashboard uses **Chart.js** to display financial data in a visually appealing and informative way. Track your income, expenses, and budget progress with dynamic charts and graphs that update in real-time.
 
 ---
 
 ## 🚨 Notifications
+
+_still to be implimented_.
 
 Receive alerts and notifications when you:
 
@@ -314,6 +326,8 @@ Receive alerts and notifications when you:
 
 ## 🧪 Running Tests
 
+_still to be implimented_.
+
 Run backend and frontend tests to ensure everything is working correctly:
 
 ```bash
@@ -322,13 +336,15 @@ npm test
 
 ## 🎨 UI/UX
 
+_still to be implimented_.
+
 The application features a modern, responsive UI designed with Tailwind CSS, ensuring a seamless experience across all devices.
 
 ## 👥 Team
 
 - Backend Developer: Darius Tohtin
 - Frontend Developer: Your Name
-- AI & API Integrations: Your Name
+- AI & API Integrations: Therese-Claire Agabi
 
 ## 📄 License
 
@@ -338,6 +354,8 @@ This project is licensed under the MIT LICENCE - see the [LICENSE](LICENSE) file
 
 If you have any questions or feedback, feel free to reach out:
 
-- Darius Tohtin: [Github](https://github.com/drac-pro) [Email](dariustohtin@gmail.com)
-- Therese-Claire Agabi:
-- Edzordzinam Alipui:[Github](https://github.com/edzordzinam44) [Email](edzordzinam.alipui@gmail.com)
+- Darius Tohtin: [Github](https://github.com/drac-pro) **Email** - <dariustohtin@gmail.com>
+- Therese-Claire Agabi: [Github](https://github.com/Therese-Claire) **Email** - <awonguagabi@gmail.com>
+- Edzordzinam Alipui:[Github](https://github.com/edzordzinam44) **Email** - <edzordzinam.alipui@gmail.com>
+
+Made with ❤️ by us.
