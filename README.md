@@ -62,7 +62,7 @@ FinMap is built to showcase the combined power of modern web technologies, machi
 
 Before you begin, ensure you have the following installed:
 
-- **Node.js**: [Download Node.js](https://nodejs.org/)
+- **Node.js**: [Download Node.js](https://nodejs.org/) _download node 18_
 - **MongoDB**: [Install MongoDB](https://www.mongodb.com/try/download/community)
 - **Alpha Vantage API Key**: [Sign up for free](https://www.alphavantage.co/support/#api-key)
 - **ExchangeRate API Key**: [Get an API key](https://www.exchangerate-api.com/)
@@ -86,26 +86,19 @@ Before you begin, ensure you have the following installed:
    Create a `.env` file in the root of your project and add the following:
 
     ```bash
-    PORT=3000
+    PORT=5000
     DB_HOST=localhost
     DB_PORT=27017
     DB_DATABASE=finmap
-    ALPHA_VANTAGE_API_KEY=your-api-key
-    EXCHANGE_RATE_API_KEY=your-api-key
     JWT_SECRET=your-secret-key
     ```
+
+    You can use  this command `openssl rand -base64 64` to generate your secrete key above.
 
 4. **Start the server**:
 
     ```bash
     npm run start-server
-    ```
-
-5. **Run the frontend**:
-
-    ```bash
-    cd client
-    npm start
     ```
 
 ---
