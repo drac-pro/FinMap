@@ -343,7 +343,6 @@ The application features a modern, responsive UI designed with Tailwind CSS, ens
 ## 👥 Team
 
 - Backend Developer: Darius Tohtin
-- Frontend Developer: Your Name
 - AI & API Integrations: Therese-Claire Agabi
 
 ## 📄 License
@@ -356,6 +355,5 @@ If you have any questions or feedback, feel free to reach out:
 
 - Darius Tohtin: [Github](https://github.com/drac-pro) **Email** - <dariustohtin@gmail.com>
 - Therese-Claire Agabi: [Github](https://github.com/Therese-Claire) **Email** - <awonguagabi@gmail.com>
-- Edzordzinam Alipui:[Github](https://github.com/edzordzinam44) **Email** - <edzordzinam.alipui@gmail.com>
 
 Made with ❤️ by us.
